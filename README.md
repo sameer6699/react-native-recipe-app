@@ -48,3 +48,19 @@ cd mobile
 npm install
 npx expo start
 ```
+
+## Project Image
+
+To display an image in this README, add your image to the new `asset` folder at the project root. For example:
+
+```markdown
+![Project Screenshot](asset/your-image.png)
+```
+
+Replace `your-image.png` with the actual filename you add to the `asset` folder.
+
+### Mockups
+
+![First Mockup](asset/first-mockup.jpg)
+
+![Second Mockup](asset/second-mockup.jpg)
