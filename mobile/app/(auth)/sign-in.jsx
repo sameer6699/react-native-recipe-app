@@ -28,12 +28,17 @@ const SignInScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleSignIn = async () => {
     if (!email || !password) {
       Alert.alert("Error", "Please fill in all fields");
       return;
     }
-
+    if (!emailRegex.test(email)) {
+      Alert.alert("Error", "Please enter a valid email address");
+      return;
+    }
     if (!isLoaded) return;
 
     setLoading(true);
@@ -51,7 +56,8 @@ const SignInScreen = () => {
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err) {
-      Alert.alert("Error", err.errors?.[0]?.message || "Sign in failed");
+      const errorMsg = err.errors?.[0]?.longMessage || err.errors?.[0]?.message || "Sign in failed. Please try again.";
+      Alert.alert("Error", errorMsg);
       console.error(JSON.stringify(err, null, 2));
     } finally {
       setLoading(false);

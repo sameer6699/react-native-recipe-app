@@ -27,8 +27,11 @@ const SignUpScreen = () => {
   const [loading, setLoading] = useState(false);
   const [pendingVerification, setPendingVerification] = useState(false);
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleSignUp = async () => {
     if (!email || !password) return Alert.alert("Error", "Please fill in all fields");
+    if (!emailRegex.test(email)) return Alert.alert("Error", "Please enter a valid email address");
     if (password.length < 6) return Alert.alert("Error", "Password must be at least 6 characters");
 
     if (!isLoaded) return;
@@ -42,7 +45,8 @@ const SignUpScreen = () => {
 
       setPendingVerification(true);
     } catch (err) {
-      Alert.alert("Error", err.errors?.[0]?.message || "Failed to create account");
+      const errorMsg = err.errors?.[0]?.longMessage || err.errors?.[0]?.message || "Failed to create account. Please try again.";
+      Alert.alert("Error", errorMsg);
       console.error(JSON.stringify(err, null, 2));
     } finally {
       setLoading(false);

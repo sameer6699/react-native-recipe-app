@@ -37,6 +37,9 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "clerkPublishableKey": "pk_test_cHJvYmFibGUtaG9yc2UtMzkuY2xlcmsuYWNjb3VudHMuZGV2JA"
     }
   }
 }
